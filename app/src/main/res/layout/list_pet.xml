@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="10dp"
+    app:cardUseCompatPadding="true">
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dp"
+        android:orientation="horizontal"
+        android:layout_margin="8dp">
+        
+        <ImageView
+            android:id="@+id/imgGambarPet"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@color/cardview_dark_background"
+            android:layout_margin="8dp"
+            android:layout_gravity="center"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="5dp">
+
+            <TextView
+                android:id="@+id/txtJenisPet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Jenis Pet"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:paddingLeft="5dp"
+                />
+
+            <TextView
+                android:id="@+id/txtUmurPet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Umur Pet"
+                android:textSize="15sp"
+                android:paddingLeft="5dp"
+                />
+
+            <TextView
+                android:id="@+id/txtJenisKelaminPet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Jenis Kelamin Pet"
+                android:textSize="15sp"
+                android:paddingLeft="5dp"
+                />
+
+            <TextView
+                android:id="@+id/txtHargaPet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Harga Pet"
+                android:textSize="15sp"
+                android:paddingLeft="5dp"
+                />
+
+            <TextView
+                android:id="@+id/txtDeskripsiPet"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,95 @@
+package com.example.tugasday6;
+
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.provider.MediaStore;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+import java.io.ByteArrayOutputStream;
+
+public class DetailActivity extends AppCompatActivity implements View.OnClickListener {
+    private String jenis, umur, jenisKelamin, harga, deskripsi;
+    private int gambar;
+    private ImageView imgDetail;
+    private TextView txtDetailJenis, txtDetailUmur, txtDetailJenisKelamin, txtDetailHarga, txtDetailDeskripsi;
+    private Button btnShare;
+
+    @SuppressLint("MissingInflatedId")
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_detail);
+
+        imgDetail = findViewById(R.id.imgDetail);
+        txtDetailJenis = findViewById(R.id.txtDetailJenis);
+        txtDetailUmur = findViewById(R.id.txtDetailUmur);
+        txtDetailJenisKelamin = findViewById(R.id.txtDetailJenisKelamin);
+        txtDetailHarga = findViewById(R.id.txtDetailHarga);
+        txtDetailDeskripsi = findViewById(R.id.txtDetailDeskripsi);
+        btnShare = findViewById(R.id.btnShare);
+
+        jenis = getIntent().getStringExtra("nama");
+        umur = getIntent().getStringExtra("umur");
+        jenisKelamin = getIntent().getStringExtra("jenisKelamin");
+        harga = getIntent().getStringExtra("harga");
+        deskripsi = getIntent().getStringExtra("deskripsi");
+        gambar = getIntent().getIntExtra("gambar", 0);
+
+        txtDetailJenis.setText(jenis);
+        txtDetailUmur.setText(umur);
+        txtDetailJenisKelamin.setText(jenisKelamin);
+        txtDetailHarga.setText(harga);
+        txtDetailDeskripsi.setText(deskripsi);
+        imgDetail.setImageResource(gambar);
+        btnShare.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        shareImageAndText();
+    }
+
+    private void shareImageAndText() {
+        Bitmap bitmap = ((BitmapDrawable) imgDetail.getDrawable()).getBitmap();
+        String text = txtDetailJenis.getText().toString() + "\n" +
+                txtDetailUmur.getText().toString() + "\n" +
+                txtDetailJenisKelamin.getText().toString() + "\n" +
+                txtDetailHarga.getText().toString() + "\n" +
+                txtDetailDeskripsi.getText().toString();
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("image/*");
+
+        Uri uri = getImageUri(this, bitmap);
+        intent.putExtra(Intent.EXTRA_STREAM, uri);
+        intent.putExtra(Intent.EXTRA_TEXT, text);
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(Intent.createChooser(intent, "Share melalui"));
+        } else {
+            Toast.makeText(this, "Tidak ada aplikasi yang dapat menangani intent ini", Toast.LENGTH_SHORT).show();
+        }
+    }
+    private Uri getImageUri(Context context, Bitmap bitmap) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap, "Title", null);
+        return Uri.parse(path);
+    }
+}
