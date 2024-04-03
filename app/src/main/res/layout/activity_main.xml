@@ -7,14 +7,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#E9C874"
+    android:background="#B0926A"
     tools:context=".MainActivity">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Bjorwi Pet Shop"
-        android:background="#5F6F52"
+        android:background="#706233"
         android:textStyle="italic"
         android:textSize="30sp"
         android:gravity="center"

@@ -44,7 +44,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         txtDetailDeskripsi = findViewById(R.id.txtDetailDeskripsi);
         btnShare = findViewById(R.id.btnShare);
 
-        jenis = getIntent().getStringExtra("nama");
+        jenis = getIntent().getStringExtra("jenis");
         umur = getIntent().getStringExtra("umur");
         jenisKelamin = getIntent().getStringExtra("jenisKelamin");
         harga = getIntent().getStringExtra("harga");
